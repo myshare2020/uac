@@ -3,25 +3,20 @@ Universal Application Chain extended from EOS chain.
 
 <h1>Purpose</h1>
 
-<p>
 To realize a dedicated public chain under control, supporting cross-chain, fast transfer, asset tokenization, custody, settlement and other services.
-</p>
-<p>
+
 The EOS public chain code is selected as the basis for expansion, mainly because the EOS public chain has the following characteristics,
 1. The account authorization mechanism is relatively complete.
 2. The packing speed is relatively fast.
 3. The energy consumption of the public chain is relatively low.
-</p>
-<p>
+
 With simple extensions, business needs can be supported.
-</p>
-<p>
+
 Main extended functions:
 1. By default, it is forbidden for the account to set a contract and restrict the permission to publish applications.
 2. Add the role of application administrator and jointly manage resources such as applications and tokens.
 3. Add application attributes and restrict the use of applications.
 4. Add token attributes to restrict the use of tokens.
-</p>
 
 <h1>Build</h1>
 
@@ -50,12 +45,14 @@ Use the uac files to overwrite the files in the corresponding directories.
 <h2>Expand built-in account</h2>
 
 eosio.app
-<p>application administrator account</p>
+
+application administrator account
 
 <h2>Extended interface commands</h2>
 
 1. Set account properties
-<p>Application administrator authorization is required.</p>
+
+Application administrator authorization is required.
 <pre>
 bindattrs &lt;account&gt;
 account user account
@@ -63,7 +60,8 @@ account user account
 </pre>
 
 2. Set application properties
-<p>The operation account, application account, and application administrator authorization are required.</p>
+
+The operation account, application account, and application administrator authorization are required.
 <pre>
 bindapp &lt;account&gt; &lt;opr_code&gt; &lt;appid&gt;
 account Operation account
@@ -80,7 +78,8 @@ appid application id
 </pre>
 <br/>
 1) Create application
-<p>The operation account is the application receiving account, which must be an freedom account. When transferring ownership, other attributes can be modified at the same time.</p>
+
+The operation account is the application receiving account, which must be an freedom account. When transferring ownership, other attributes can be modified at the same time.
 <pre>
 bindapp receive_account create APPID ... -p eosio.app -p receive_account
   
@@ -88,7 +87,8 @@ bindapp apponeowner1 create 1000 --has_memo --memo "test application" --has_expi
 </pre>
 <br/>
 2) Transfer application ownership
-<p>The operation account is the application receiving account, which must be an freedom account. When transferring ownership, other attributes can be modified at the same time.</p>
+
+The operation account is the application receiving account, which must be an freedom account. When transferring ownership, other attributes can be modified at the same time.
 <pre>
 bindapp receive_account transfer APPID ... -p eosio.app -p old_owner_account -p receive_account
 
@@ -96,10 +96,12 @@ bindapp apponeowner2 transfer 1000 --has_memo --memo "new application" --has_exp
 </pre>
 <br/>
 3) Application expired
-<p>If the expiration time is set, after the application expires, application-related changes no longer require application account authorization. The application account should apply for extended usage time before it expires.</p>
+
+If the expiration time is set, after the application expires, application-related changes no longer require application account authorization. The application account should apply for extended usage time before it expires.
 
 3. Set the token properties
-<p>The operation account, application account, and application administrator authorization are required.</p>
+
+The operation account, application account, and application administrator authorization are required.
 <pre>
 bindsym &lt;account&gt; &lt;opr_code&gt; &lt;sym&gt;
 account Operation account
@@ -125,9 +127,10 @@ Start charging when transfer amount >= minval,
   Fixed fee, when level == 0, fee = minfee
   Ladder fee, when level > 0, fee = (value-minval) / level * delta + minfee, fee <= maxfee
 </pre>
-
+<br/>
 1) Transfer token ownership
-<p>The tokens are bound to the application and owned by the application. Modifying the token attributes requires application account authorization. The operation account is the token receiving account, which must be an application account. When transferring ownership, other attributes can be modified at the same time.</p>
+
+The tokens are bound to the application and owned by the application. Modifying the token attributes requires application account authorization. The operation account is the token receiving account, which must be an application account. When transferring ownership, other attributes can be modified at the same time.
 <pre>
 bindsym receive_account transfer TOKEN ... -p eosio.app -p old_app_account -p receive_account
 
@@ -182,7 +185,8 @@ Return issuing account
 </pre>
 
 5. Create token
-<p>Create tokens and bind them to application accounts and issue accounts.</p>
+
+Create tokens and bind them to application accounts and issue accounts.
 <pre>
 void create2(name owner, name issuer, asset maximum_supply)
 owner application account
