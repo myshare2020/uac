@@ -3,19 +3,25 @@ Universal Application Chain extended from EOS chain.
 
 <h1>Purpose</h1>
 
+<p>
 To realize a dedicated public chain under control, supporting cross-chain, fast transfer, asset tokenization, custody, settlement and other services.
+</p>
+<p>
 The EOS public chain code is selected as the basis for expansion, mainly because the EOS public chain has the following characteristics,
 1. The account authorization mechanism is relatively complete.
 2. The packing speed is relatively fast.
 3. The energy consumption of the public chain is relatively low.
+</p>
+<p>
 With simple extensions, business needs can be supported.
-
+</p>
+<p>
 Main extended functions:
 1. By default, it is forbidden for the account to set a contract and restrict the permission to publish applications.
-2. Increase the role of application administrator and jointly manage resources such as applications and tokens.
-3. Increase application attributes and restrict the use of applications.
+2. Add the role of application administrator and jointly manage resources such as applications and tokens.
+3. Add application attributes and restrict the use of applications.
 4. Add token attributes to restrict the use of tokens.
-
+</p>
 
 <h1>Build</h1>
 
