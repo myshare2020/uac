@@ -37,7 +37,7 @@ git checkout -b v1.9.1
 <pre>
 git clone https://github.com/myshare2020/uac --recursive
 </pre>
-Use the uac files to overwrite the files in the corresponding directory.
+Use the uac files to overwrite the files in the corresponding directories.
 
 
 
