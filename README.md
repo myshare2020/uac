@@ -152,6 +152,14 @@ appid application id
 Return appid, owner, created, expire, memo
 </pre>
 
+6. Query token transfer fee
+<pre>
+get fee &lt;sym&gt; &lt;value&gt;
+sym token symbol
+value transfer value
+Return fee(UAC)
+</pre>
+
 <h2>Extended contract instructions</h2>
 
 1. Obtain the public chain local currency symbol
