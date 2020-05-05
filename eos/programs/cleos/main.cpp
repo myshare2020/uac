@@ -2333,6 +2333,17 @@ void get_sym( const string& sym, bool json_format ) {
       std::cout << fc::json::to_pretty_string(json) << std::endl;      
    }
 }
+
+void get_fee( const string& sym, int64_t value, bool json_format ) {
+   fc::variant json;
+   json = call(get_fee_func, fc::mutable_variant_object("sym", sym)("value", value));
+   auto res = json.as<eosio::chain_apis::read_only::get_fee_results>();
+   if (!json_format) {
+      std::cout << "fee: " << res.fee << std::endl;
+   } else {
+      std::cout << fc::json::to_pretty_string(json) << std::endl;
+   }
+}
 //
 
 void get_account( const string& accountName, const string& coresym, bool json_format ) {
@@ -2825,6 +2836,14 @@ int main( int argc, char** argv ) {
    getSym->add_option("sym", sym, localized("The name of the symbol to retrieve"))->required();
    getSym->add_flag("--json,-j", print_json, localized("Output in JSON format") );
    getSym->set_callback([&]() { get_sym(sym, print_json); });
+
+   // get fee
+   int64_t value;
+   auto getFee = get->add_subcommand("fee", localized("Get fee for token and value"), false);
+   getFee->add_option("sym", sym, localized("The name of the symbol"))->required();
+   getFee->add_option("value", value, localized("The value of transfer"))->required();
+   getFee->add_flag("--json,-j", print_json, localized("Output in JSON format") );
+   getFee->set_callback([&]() { get_fee(sym, value, print_json); });
    //
 
    // get code

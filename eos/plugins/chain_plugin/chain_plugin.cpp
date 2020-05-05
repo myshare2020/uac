@@ -2375,6 +2375,25 @@ read_only::get_sym_results read_only::get_sym( const get_sym_params& params )con
    result.maxfee = sym.maxfee;
    return result;
 }
+
+read_only::get_fee_results read_only::get_fee( const get_fee_params& params )const {
+   get_fee_results result;
+   auto& sym = db.db().get<sym_object,by_sym>(symbol(0,params.sym.c_str()).to_symbol_code().value);
+   if (sym.tollor && params.value >= sym.minval) {
+      int64_t _fee = sym.minfee;
+      if (sym.level != 0) {
+         int64_t delta = params.value - sym.minval;
+         if (delta >= sym.level)
+            _fee += (delta / sym.level) * sym.delta;
+      }
+      if (_fee > 0) {
+         if (sym.maxfee != 0 && _fee > sym.maxfee)
+            _fee = sym.maxfee;
+         result.fee = _fee;
+      }
+   }
+   return result;
+}
 //
 
 read_only::get_account_results read_only::get_account( const get_account_params& params )const {

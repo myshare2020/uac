@@ -90,6 +90,7 @@ namespace eosio { namespace client { namespace http {
    // by myextend
    const string get_app_func = chain_func_base + "/get_app";
    const string get_sym_func = chain_func_base + "/get_sym";
+   const string get_sym_func = chain_func_base + "/get_fee";
    //
    const string get_table_func = chain_func_base + "/get_table_rows";
    const string get_table_by_scope_func = chain_func_base + "/get_table_by_scope";

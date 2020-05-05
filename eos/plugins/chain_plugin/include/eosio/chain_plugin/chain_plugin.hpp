@@ -199,6 +199,15 @@ public:
       string           sym;
    };
    get_sym_results get_sym( const get_sym_params& params )const;
+
+   struct get_fee_results {
+      int64_t          fee = 0;
+   };
+   struct get_fee_params {
+      string           sym;
+      int64_t          value;
+   };
+   get_fee_results get_fee( const get_fee_params& params )const;
    //
 
    struct get_account_params {
@@ -831,6 +840,8 @@ FC_REFLECT( eosio::chain_apis::read_only::get_app_results,
             (appid)(owner)(created)(expire)(memo) )
 FC_REFLECT( eosio::chain_apis::read_only::get_sym_results,
             (sym)(appid)(tollor)(issuer)(minval)(minfee)(level)(delta)(maxfee) )
+FC_REFLECT( eosio::chain_apis::read_only::get_fee_results,
+            (fee) )
 //
 // @swap code_hash
 FC_REFLECT( eosio::chain_apis::read_only::get_code_results, (account_name)(code_hash)(wast)(wasm)(abi) )
@@ -840,6 +851,7 @@ FC_REFLECT( eosio::chain_apis::read_only::get_account_params, (account_name)(exp
 // by myextend
 FC_REFLECT( eosio::chain_apis::read_only::get_app_params, (appid) )
 FC_REFLECT( eosio::chain_apis::read_only::get_sym_params, (sym) )
+FC_REFLECT( eosio::chain_apis::read_only::get_fee_params, (sym)(value) )
 //
 FC_REFLECT( eosio::chain_apis::read_only::get_code_params, (account_name)(code_as_wasm) )
 FC_REFLECT( eosio::chain_apis::read_only::get_code_hash_params, (account_name) )

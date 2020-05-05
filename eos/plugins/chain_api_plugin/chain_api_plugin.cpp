@@ -88,6 +88,7 @@ void chain_api_plugin::plugin_startup() {
       // by myextend
       CHAIN_RO_CALL(get_app, 200),
       CHAIN_RO_CALL(get_sym, 200),
+      CHAIN_RO_CALL(get_fee, 200),
       //
       CHAIN_RO_CALL(get_code, 200),
       CHAIN_RO_CALL(get_code_hash, 200),
