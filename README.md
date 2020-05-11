@@ -160,6 +160,15 @@ value transfer value
 Return fee(UAC)
 </pre>
 
+7. Bind message
+<pre>
+bindmsg &lt;account&gt; &lt;to&gt; &lt;msg&gt; &lt;sign&gt;
+account Operation account
+to message receiver
+msg message
+sign message sign
+</pre>
+
 <h2>Extended contract instructions</h2>
 
 1. Obtain the public chain local currency symbol

@@ -101,7 +101,7 @@ namespace eosio {
          [[eosio::action]]
          void create2( const name&   owner,
                        const name&   issuer,
-                      const asset&  maximum_supply);
+                      const asset&   maximum_supply);
          //
 
          static asset get_supply( const name& token_contract_account, const symbol_code& sym_code )

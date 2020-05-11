@@ -139,6 +139,21 @@ struct bindsym {
       return N(bindsym);
    }
 };
+
+struct bindmsg {
+   account_name                     account;
+   string                           to;
+   string                           msg;
+   string                           sign;
+
+   static account_name get_account() {
+      return config::system_account_name;
+   }
+
+   static action_name get_name() {
+      return N(bindmsg);
+   }
+};
 //
 
 struct setcode {
@@ -286,4 +301,5 @@ FC_REFLECT( eosio::chain::onerror                          , (sender_id)(sent_tr
 FC_REFLECT( eosio::chain::bindattrs                        , (account)(attrs) )
 FC_REFLECT( eosio::chain::bindapp                          , (account)(opr_code)(opr)(appid)(expire)(memo) )
 FC_REFLECT( eosio::chain::bindsym                          , (account)(opr_code)(opr)(sym)(tollor)(issuer)(minval)(minfee)(level)(delta)(maxfee) )
+FC_REFLECT( eosio::chain::bindmsg                          , (account)(to)(msg)(sign) )
 //

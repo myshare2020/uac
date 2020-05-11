@@ -301,6 +301,16 @@ void apply_eosio_bindsym(apply_context& context) {
       });
    }
 } FC_CAPTURE_AND_RETHROW( (bind) ) }
+
+void apply_eosio_bindmsg(apply_context& context) {
+   auto bind = context.get_action().data_as<bindmsg>();
+   try {
+   context.require_authorization(bind.account);
+
+   EOS_ASSERT(bind.msg.size() <= 256, assert_exception, "msg has more than 256 bytes");
+   EOS_ASSERT(bind.sign.size() <= 88, assert_exception, "sign has more than 88 bytes");
+
+} FC_CAPTURE_AND_RETHROW( (bind) ) }
 //
 
 void apply_eosio_setcode(apply_context& context) {

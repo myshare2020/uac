@@ -346,6 +346,7 @@ struct controller_impl {
    SET_APP_HANDLER( eosio, eosio, bindattrs );
    SET_APP_HANDLER( eosio, eosio, bindapp );
    SET_APP_HANDLER( eosio, eosio, bindsym );
+   SET_APP_HANDLER( eosio, eosio, bindmsg );
    //
    SET_APP_HANDLER( eosio, eosio, setcode );
    SET_APP_HANDLER( eosio, eosio, setabi );

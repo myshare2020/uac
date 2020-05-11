@@ -609,7 +609,7 @@ chain::action create_bindsym(const name& account, uint32_t opr_code, uint32_t op
 }
 
 chain::action create_bindapp(const name& account, uint32_t opr_code, uint32_t opr, uint32_t appid,
-   time_point expire, string memo) {
+   time_point expire, const string& memo) {
    return action {
       get_account_permissions(tx_permission, {account,config::active_name}),
       eosio::chain::bindapp{
@@ -619,6 +619,18 @@ chain::action create_bindapp(const name& account, uint32_t opr_code, uint32_t op
          .appid        = appid,
          .expire       = expire,
          .memo         = memo
+      }
+   };
+}
+
+chain::action create_bindmsg(const name& account, const string& to, const string& msg, const string& sign) {
+   return action {
+      get_account_permissions(tx_permission, {account,config::active_name}),
+      eosio::chain::bindmsg{
+         .account      = account,
+         .to         = to,
+         .msg          = msg,
+         .sign         = sign
       }
    };
 }
@@ -1296,6 +1308,31 @@ struct create_bindapp_subcommand {
                opr |= (uint32_t)bindapp::opr_fields::memo;
             auto create = create_bindapp(name(account), _opr_code, opr, appid, 
                has_expire?time_point::from_iso_string(expire):time_point(microseconds()), memo);
+            send_actions( { create } );
+      });
+   }
+};
+
+struct create_bindmsg_subcommand {
+   string account;
+   string to;
+   string msg;
+   string sign;
+
+   create_bindmsg_subcommand(CLI::App* actionRoot) {
+      auto createBind = actionRoot->add_subcommand(
+                              ("bindmsg"),
+                              (localized("Bind message"))
+      );
+      createBind->add_option("account", account, localized("account"))->required();
+      createBind->add_option("to", to, localized("message receiver"))->required();
+      createBind->add_option("msg", msg, localized("message"));
+      createBind->add_option("sign", sign, localized("message sign"));
+
+      add_standard_transaction_options(createBind, "account@active");
+
+      createBind->set_callback([this] {
+            auto create = create_bindmsg(name(account), to, msg, sign);
             send_actions( { create } );
       });
    }
@@ -4213,6 +4250,7 @@ int main( int argc, char** argv ) {
    auto createBindAttrsSystem = create_bindattrs_subcommand(system);
    auto createBindAppSystem = create_bindapp_subcommand(system);
    auto createBindSymSystem = create_bindsym_subcommand(system);
+   auto createBindMsgSystem = create_bindmsg_subcommand(system);
    //
    auto registerProducer = register_producer_subcommand(system);
    auto unregisterProducer = unregister_producer_subcommand(system);

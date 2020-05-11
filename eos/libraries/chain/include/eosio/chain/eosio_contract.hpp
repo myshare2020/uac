@@ -20,6 +20,7 @@ namespace eosio { namespace chain {
    void apply_eosio_bindattrs(apply_context&);
    void apply_eosio_bindapp(apply_context&);
    void apply_eosio_bindsym(apply_context&);
+   void apply_eosio_bindmsg(apply_context&);
    //
 
    /*
