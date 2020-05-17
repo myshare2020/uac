@@ -181,6 +181,12 @@ namespace eosiosystem {
                           uint64_t          level,
                           uint64_t          delta,
                           uint64_t          maxfee) {}                          
+
+         [[eosio::action]]
+         void bindmsg( const name&          account,   
+                       const name&          to,
+                const std::string&          msg,
+                const std::string&          sign) {}                          
          //
 
          /**

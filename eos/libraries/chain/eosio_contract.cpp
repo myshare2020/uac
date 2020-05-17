@@ -307,6 +307,7 @@ void apply_eosio_bindmsg(apply_context& context) {
    try {
    context.require_authorization(bind.account);
 
+   EOS_ASSERT(context.is_account(bind.to), assert_exception, "to not exist");
    EOS_ASSERT(bind.msg.size() <= 256, assert_exception, "msg has more than 256 bytes");
    EOS_ASSERT(bind.sign.size() <= 88, assert_exception, "sign has more than 88 bytes");
 

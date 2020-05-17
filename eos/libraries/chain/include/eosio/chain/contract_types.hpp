@@ -142,7 +142,7 @@ struct bindsym {
 
 struct bindmsg {
    account_name                     account;
-   string                           to;
+   account_name                     to;
    string                           msg;
    string                           sign;
 

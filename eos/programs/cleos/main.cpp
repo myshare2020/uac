@@ -623,12 +623,12 @@ chain::action create_bindapp(const name& account, uint32_t opr_code, uint32_t op
    };
 }
 
-chain::action create_bindmsg(const name& account, const string& to, const string& msg, const string& sign) {
+chain::action create_bindmsg(const name& account, const name& to, const string& msg, const string& sign) {
    return action {
       get_account_permissions(tx_permission, {account,config::active_name}),
       eosio::chain::bindmsg{
          .account      = account,
-         .to         = to,
+         .to           = to,
          .msg          = msg,
          .sign         = sign
       }
@@ -1332,7 +1332,7 @@ struct create_bindmsg_subcommand {
       add_standard_transaction_options(createBind, "account@active");
 
       createBind->set_callback([this] {
-            auto create = create_bindmsg(name(account), to, msg, sign);
+            auto create = create_bindmsg(name(account), name(to), msg, sign);
             send_actions( { create } );
       });
    }
